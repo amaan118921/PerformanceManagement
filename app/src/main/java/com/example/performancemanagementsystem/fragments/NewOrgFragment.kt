@@ -1,4 +1,4 @@
-package com.example.performancemanagementsystem.Fragments
+package com.example.performancemanagementsystem.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,33 +7,37 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.example.performancemanagementsystem.CompanyInfoModel
-import com.example.performancemanagementsystem.DashScreenActivity
+import com.example.performancemanagementsystem.dataModel.CompanyInfoModel
+import com.example.performancemanagementsystem.activities.DashScreenActivity
 import com.example.performancemanagementsystem.R
-import com.example.performancemanagementsystem.UserModel
+import com.example.performancemanagementsystem.dataModel.UserModel
 import com.example.performancemanagementsystem.databinding.FragmentNewOrgBinding
+import com.example.performancemanagementsystem.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
+@AndroidEntryPoint
+class NewOrgFragment : BaseFragment() {
 
-class NewOrgFragment(username: String, email: String, uid: String) : Fragment() {
-
-
-    val username = username
-    val email = email
-    val uid = uid
     private lateinit var newOrgBinding : FragmentNewOrgBinding
-    private lateinit var database : FirebaseDatabase
-    private lateinit var auth : FirebaseAuth
+    @Inject
+    lateinit var database : FirebaseDatabase
+    @Inject
+    lateinit var auth : FirebaseAuth
     private lateinit var dbref : DatabaseReference
-
-
+    private var username: String? = null
+    private var email: String? = null
+    private var uid: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        username = arguments?.getString(Constants.USERNAME)
+        email = arguments?.getString(Constants.EMAIL)
+        uid = arguments?.getString(Constants.USER_UID)
     }
 
     override fun onCreateView(
@@ -84,9 +88,12 @@ class NewOrgFragment(username: String, email: String, uid: String) : Fragment() 
 
 
 
-            val user = UserModel(username,email,uid)
+            val user = username?.let { it1 -> uid?.let { it2 -> email?.let { it3 ->
+                UserModel(it1,
+                    it3, it2)
+            } } }
             val members = ArrayList<UserModel>()
-            members.add(user)
+            user?.let { it1 -> members.add(it1) }
 
             val companyInfoModel = CompanyInfoModel(
                 auth.currentUser!!.uid,
@@ -98,7 +105,7 @@ class NewOrgFragment(username: String, email: String, uid: String) : Fragment() 
 
             )
 
-            dbref!!.child(auth!!.uid!!).setValue(companyInfoModel)
+            dbref.child(auth.uid!!).setValue(companyInfoModel)
 
 //            val feedlist = ArrayList<String>()
 //            feedlist!!.add("")
@@ -161,8 +168,5 @@ class NewOrgFragment(username: String, email: String, uid: String) : Fragment() 
 
     companion object{
         var generatedcompanyCode : Int = 0
-
-
-
     }
 }

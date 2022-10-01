@@ -1,4 +1,4 @@
-package com.example.performancemanagementsystem.Fragments
+package com.example.performancemanagementsystem.fragments
 
 import android.content.ContentValues
 import android.os.Bundle
@@ -11,18 +11,20 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.performancemanagementsystem.R
 import com.example.performancemanagementsystem.databinding.FragmentRegisterBinding
+import com.example.performancemanagementsystem.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
-class RegisterFragment : Fragment() {
-
-    private lateinit var auth : FirebaseAuth
+@AndroidEntryPoint
+class RegisterFragment : BaseFragment() {
+    @Inject
+    lateinit var auth : FirebaseAuth
     private lateinit var registerBinding: FragmentRegisterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -83,34 +85,23 @@ class RegisterFragment : Fragment() {
             return
         }
 
-
-
-
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(ContentValues.TAG, "createUserWithEmail:success")
                         val user = auth.currentUser
-                        requireActivity().supportFragmentManager.beginTransaction()
-                            .replace(R.id.auth_container, NewMemberFragment(username,email,user!!.uid))
-                            .commit()
-
+                        Bundle().apply {
+                            putString(Constants.USERNAME, username)
+                            putString(Constants.EMAIL, email)
+                            putString(Constants.USER_UID, user?.uid)
+                            replaceFragment(Constants.NEW_MEMBER, Constants.AUTH_CONTAINER, this)
+                        }
                     } else {
-
                         if (task.exception is FirebaseAuthUserCollisionException) {
                             Toast.makeText(context, "User with this email already exist.", Toast.LENGTH_SHORT).show()}
                         Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
-
-
                     }
                 }
-
-
-
-
-
     }
-
-
 }

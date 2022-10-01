@@ -1,31 +1,29 @@
-package com.example.performancemanagementsystem.Fragments
+package com.example.performancemanagementsystem.fragments
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.performancemanagementsystem.*
-import com.example.performancemanagementsystem.Adapter.FeedbackListAdapter
 import com.example.performancemanagementsystem.Adapter.QuestionListAdapter
-import com.example.performancemanagementsystem.Fragments.NewOrgFragment.Companion.generatedcompanyCode
 import com.example.performancemanagementsystem.R
+import com.example.performancemanagementsystem.activities.DashScreenActivity
+import com.example.performancemanagementsystem.dataModel.CompanyInfoModel
+import com.example.performancemanagementsystem.dataModel.FeedbackModel
+import com.example.performancemanagementsystem.dataModel.UserModel
 import com.example.performancemanagementsystem.databinding.FragmentNewFeedBinding
+import com.example.performancemanagementsystem.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
-
-class newFeedFragment() : Fragment() {
+@AndroidEntryPoint
+class newFeedFragment() :  BaseFragment() {
 
     private lateinit var newFeedBinding: FragmentNewFeedBinding
 
@@ -56,14 +54,6 @@ class newFeedFragment() : Fragment() {
         dbrefCompanyInfo = FirebaseDatabase.getInstance().getReference("CompanyInfo")
 
         dbrefFeedbackList = FirebaseDatabase.getInstance().getReference("FeedbackList")
-
-
-
-
-
-
-
-
 
         newFeedBinding = DataBindingUtil.inflate(
             inflater,
@@ -346,10 +336,7 @@ class newFeedFragment() : Fragment() {
                         if (i.name == member) {
 
                             dbref.child(keyValue).child("member").setValue(member)
-
-                            requireActivity().supportFragmentManager.beginTransaction()
-                                .replace(R.id.dash_container, DashFragment())
-                                .commit()
+                            replaceFragment(Constants.DASH_FRAG, Constants.DASH_CONTAINER, null)
                             exist = 1
                             break
 

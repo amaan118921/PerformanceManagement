@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_background"
-    tools:context=".Fragments.DashFragment">
+    tools:context=".fragments.DashFragment">
 
     <TextView
         android:id="@+id/blue"

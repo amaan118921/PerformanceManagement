@@ -1,12 +1,13 @@
-package com.example.performancemanagementsystem
+package com.example.performancemanagementsystem.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-import com.example.performancemanagementsystem.Fragments.LoginFragment
-import com.example.performancemanagementsystem.Fragments.NewMemberFragment
-import com.example.performancemanagementsystem.Fragments.RegisterFragment
+import com.example.performancemanagementsystem.fragments.LoginFragment
+import com.example.performancemanagementsystem.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

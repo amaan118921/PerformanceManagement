@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/statusContainer"
-    tools:context=".StatusActivity">
+    tools:context=".activities.StatusActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

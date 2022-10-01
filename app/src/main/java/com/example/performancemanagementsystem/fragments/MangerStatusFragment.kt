@@ -1,4 +1,4 @@
-package com.example.performancemanagementsystem.Fragments
+package com.example.performancemanagementsystem.fragments
 
 import android.content.Intent
 import android.graphics.Color
@@ -10,9 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.performancemanagementsystem.AnswersModel
-import com.example.performancemanagementsystem.DashScreenActivity
-import com.example.performancemanagementsystem.FeedbackModel
+import com.example.performancemanagementsystem.dataModel.AnswersModel
+import com.example.performancemanagementsystem.activities.DashScreenActivity
+import com.example.performancemanagementsystem.dataModel.FeedbackModel
 import com.example.performancemanagementsystem.R
 import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.components.YAxis
@@ -20,20 +20,21 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.utils.ColorTemplate
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_status.*
 
-class MangerStatusFragment(private val username : String , private val uid : String) : Fragment() {
+@AndroidEntryPoint
+class MangerStatusFragment(private val username: String, private val uid: String) : BaseFragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        }
+    }
 
 
     override fun onCreateView(
@@ -49,7 +50,7 @@ class MangerStatusFragment(private val username : String , private val uid : Str
         val dbrefFeedback = FirebaseDatabase.getInstance().getReference("Feedback")
         val dbrefAnswers = FirebaseDatabase.getInstance().getReference("Answers")
         var quesList: ArrayList<String> = ArrayList()
-        val bck : ImageView = view.findViewById(R.id.statusbackbtn)
+        val bck: ImageView = view.findViewById(R.id.statusbackbtn)
 
         bck.setOnClickListener {
 
@@ -169,16 +170,14 @@ class MangerStatusFragment(private val username : String , private val uid : Str
                                                             leftAxis.addLimitLine(l4)
 
 
-
                                                             var s = "X-Axis\n"
-                                                            var j=1
-                                                            for(i in quesList)
-                                                            {
+                                                            var j = 1
+                                                            for (i in quesList) {
                                                                 s = "$s$j. $i"
                                                                 s += "\n"
                                                                 j++
                                                             }
-                                                            s+= "\nY-Axis\n1.Worst\n2.Bad\n3.Good\n4.Excellent\n"
+                                                            s += "\nY-Axis\n1.Worst\n2.Bad\n3.Good\n4.Excellent\n"
                                                             gap.text = s
 
                                                         }
@@ -202,9 +201,7 @@ class MangerStatusFragment(private val username : String , private val uid : Str
                                 })
 
                             break
-                        }
-                        else
-                        {
+                        } else {
                             StatusName.text =
                                 username
                             StatusMemberID.text =

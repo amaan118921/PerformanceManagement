@@ -1,14 +1,17 @@
-package com.example.performancemanagementsystem
+package com.example.performancemanagementsystem.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.performancemanagementsystem.Fragments.MangerStatusFragment
-import com.example.performancemanagementsystem.Fragments.StatusFragment
+import com.example.performancemanagementsystem.fragments.MangerStatusFragment
+import com.example.performancemanagementsystem.R
+import com.example.performancemanagementsystem.dataModel.AnswersModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ManagerStatusActivity : AppCompatActivity() {
 
     private lateinit var dbrefGraphData : DatabaseReference

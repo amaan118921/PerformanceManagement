@@ -1,4 +1,4 @@
-package com.example.performancemanagementsystem.Fragments
+package com.example.performancemanagementsystem.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -11,17 +11,18 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.performancemanagementsystem.*
-import com.example.performancemanagementsystem.Adapter.FeedbackListAdapter
-import com.example.performancemanagementsystem.Adapter.QuestionListAdapter
 import com.example.performancemanagementsystem.Adapter.ResponseListAdapter
 import com.example.performancemanagementsystem.R
+import com.example.performancemanagementsystem.dataModel.AnswersModel
+import com.example.performancemanagementsystem.dataModel.CompanyInfoModel
+import com.example.performancemanagementsystem.dataModel.FeedbackModel
+import com.example.performancemanagementsystem.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import java.net.IDN
+import dagger.hilt.android.AndroidEntryPoint
 
-
-class ResponseFragment(private val feedId: String) : Fragment() {
+@AndroidEntryPoint
+class ResponseFragment(private val feedId: String) : BaseFragment() {
 
 
     private lateinit var dbrefFeedback: DatabaseReference
@@ -193,11 +194,10 @@ class ResponseFragment(private val feedId: String) : Fragment() {
                                 dbrefFeedbackList.child(cmpcode)
                                     .child(FirebaseAuth.getInstance().currentUser!!.uid)
                                     .setValue(feedlist)
-
-                                requireActivity().supportFragmentManager.beginTransaction()
-                                    .replace(R.id.dash_container, PendingFeedback(cmpcode))
-                                    .commit()
-
+                                Bundle().apply {
+                                    putString(Constants.CODE, cmpcode)
+                                    replaceFragment(Constants.PENDING_FEEDBACK,Constants.DASH_CONTAINER,this)
+                                }
                             }
                         }
 

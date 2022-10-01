@@ -9,7 +9,7 @@
 
         android:background="@color/light_background"
         android:orientation="vertical"
-        tools:context=".Fragments.newFeedFragment">
+        tools:context=".fragments.newFeedFragment">
 
         <LinearLayout
             android:id="@+id/layout_logo"

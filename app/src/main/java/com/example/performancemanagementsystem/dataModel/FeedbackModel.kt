@@ -1,4 +1,4 @@
-package com.example.performancemanagementsystem
+package com.example.performancemanagementsystem.dataModel
 
 class FeedbackModel(
     val uid : String,

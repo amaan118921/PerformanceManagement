@@ -1,4 +1,4 @@
-package com.example.performancemanagementsystem.Fragments
+package com.example.performancemanagementsystem.fragments
 
 import android.content.Intent
 import android.graphics.Color
@@ -11,6 +11,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.performancemanagementsystem.*
+import com.example.performancemanagementsystem.activities.DashScreenActivity
+import com.example.performancemanagementsystem.dataModel.AnswersModel
+import com.example.performancemanagementsystem.dataModel.FeedbackModel
 import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
@@ -22,10 +25,11 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_status.*
 
-
-class StatusFragment(private val username:String) : Fragment() {
+@AndroidEntryPoint
+class StatusFragment(private val username:String) : BaseFragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

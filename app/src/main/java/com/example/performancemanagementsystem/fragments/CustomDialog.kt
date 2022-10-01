@@ -1,4 +1,4 @@
-package com.example.performancemanagementsystem.Fragments
+package com.example.performancemanagementsystem.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,13 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.example.performancemanagementsystem.CompanyInfoModel
-import com.example.performancemanagementsystem.DashScreenActivity
+import com.example.performancemanagementsystem.dataModel.CompanyInfoModel
+import com.example.performancemanagementsystem.activities.DashScreenActivity
 
 import com.example.performancemanagementsystem.R
-import com.example.performancemanagementsystem.UserModel
+import com.example.performancemanagementsystem.dataModel.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 

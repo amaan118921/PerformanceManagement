@@ -1,4 +1,4 @@
-package com.example.performancemanagementsystem
+package com.example.performancemanagementsystem.dataModel
 
 data class UserModel(
     var name : String,

@@ -1,12 +1,14 @@
-package com.example.performancemanagementsystem
+package com.example.performancemanagementsystem.activities
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.performancemanagementsystem.Fragments.DashFragment
+import com.example.performancemanagementsystem.fragments.DashFragment
+import com.example.performancemanagementsystem.R
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class DashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -6,12 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.performancemanagementsystem.ManagerStatusActivity
+import com.example.performancemanagementsystem.activities.ManagerStatusActivity
 import com.example.performancemanagementsystem.R
-import com.example.performancemanagementsystem.StatusActivity
-import kotlinx.android.synthetic.main.activity_manager.view.*
 
 class EmployeeListAdapter(private var context: Context, private var list : ArrayList<String>,private var IDlist : ArrayList<String>): RecyclerView.Adapter<EmployeeListAdapter.ViewHolder>() {
     class ViewHolder(view: View):RecyclerView.ViewHolder(view) {

@@ -1,18 +1,20 @@
-package com.example.performancemanagementsystem
+package com.example.performancemanagementsystem.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.performancemanagementsystem.Adapter.EmployeeListAdapter
-import com.example.performancemanagementsystem.Adapter.FeedbackListAdapter
+import com.example.performancemanagementsystem.R
+import com.example.performancemanagementsystem.dataModel.CompanyInfoModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ManagerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

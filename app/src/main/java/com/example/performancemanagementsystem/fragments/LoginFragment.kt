@@ -1,4 +1,4 @@
-package com.example.performancemanagementsystem.Fragments
+package com.example.performancemanagementsystem.fragments
 
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -9,25 +9,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import android.widget.Toast.makeText
 import androidx.databinding.DataBindingUtil
-import com.example.performancemanagementsystem.AuthActivity
-import com.example.performancemanagementsystem.DashScreenActivity
+import com.example.performancemanagementsystem.activities.DashScreenActivity
 import com.example.performancemanagementsystem.R
 import com.example.performancemanagementsystem.databinding.FragmentLoginBinding
+import com.example.performancemanagementsystem.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
+class LoginFragment : BaseFragment() {
 
-class LoginFragment : Fragment() {
+    @Inject
+    lateinit var auth: FirebaseAuth
 
-    private lateinit var auth :FirebaseAuth
-    private lateinit var loginBinding : FragmentLoginBinding
+    private lateinit var loginBinding: FragmentLoginBinding
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,21 +34,15 @@ class LoginFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-        loginBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_login,container,false)
-
-
-
+        loginBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
 
 
         loginBinding.loginButton.setOnClickListener {
 
             funLogin()
         }
-        loginBinding.btnSignup.setOnClickListener{
-            requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.auth_container, RegisterFragment())
-                    .commit()
-
+        loginBinding.btnSignup.setOnClickListener {
+            replaceFragment(Constants.REGISTER_FRAG, Constants.AUTH_CONTAINER, null)
         }
 
 
@@ -64,17 +56,17 @@ class LoginFragment : Fragment() {
 
     private fun funLogin() {
 
-        val email : String = loginBinding.etText.text.toString()
-        val password : String = loginBinding.etPass.text.toString()
+        val email: String = loginBinding.etText.text.toString()
+        val password: String = loginBinding.etPass.text.toString()
 
 
 
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
 
             loginBinding.etText.error = "Field is Required"
             return
         }
-        if(password.isEmpty()){
+        if (password.isEmpty()) {
 
             loginBinding.etPass.error = "Field is Required"
             return
@@ -96,17 +88,13 @@ class LoginFragment : Fragment() {
                     activity?.finish()
 
 
-
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(context, "Authentication failed.",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show()
 
                 }
             }
-
-
-
 
 
     }

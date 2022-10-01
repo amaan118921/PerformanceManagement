@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.performancemanagementsystem.FeedbackModel
-import com.example.performancemanagementsystem.Fragments.ResponseFragment
+import com.example.performancemanagementsystem.dataModel.FeedbackModel
+import com.example.performancemanagementsystem.fragments.ResponseFragment
 import com.example.performancemanagementsystem.R
 import com.google.firebase.database.*
 
